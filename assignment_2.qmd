@@ -109,6 +109,33 @@ pos_na_2(v5, v6)
 
 Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of the proport
 
+```{r}
+
+wamata_ridership <- read_csv("https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv")
+
+tail(wamata_ridership)
+
+```
+
+```{r}
+
+wamata_ridership |>
+      mutate(month_number = month(wamata_ridership$Date)) |>
+      mutate(date_number = day(wamata_ridership$Date))
+
+
+```
+
+```{r}
+
+# for month for date calculate date/ total month 
+# mutate new column for proportion 
+# boxplot of new column 
+
+
+
+```
+
 # Question 3:
 
 Write R code that extracts the elements "Bears", "Dolphins", and "Bengals" from the vector `V` shown below, and display the result.
@@ -119,17 +146,64 @@ V <- c("Bears", "Lions", "Dolphins", "Eagles", "Bengals")
 
 ## (3i) Subsetting by index
 
+```{r}
+
+V[1]
+V[2]
+V[3]
+V[4]
+V[5]
+```
+
 ## (3ii) Subsetting using a `for` loop
+
+```{r}
+
+for (i in V) {
+  print(i)
+}
+
+```
 
 ## (3iii)Returning all values in a single vector (one line of code)
 
 ### (a) Using positive indices
 
+```{r}
+
+V[1:5]
+
+```
+
 ### (b) Using negative indices
+
+```{r}
+
+V[-6]
+
+```
 
 ### (c) Using logical indexing
 
+```{r}
+
+V[]
+
+```
+
 ### (d) Attempting to subset by names
+
+```{r}
+
+names(V) <- c("a", "b", "c", "d", "e")
+
+V["a"]
+V["b"]
+V["c"]
+V["d"]
+V["e"]
+
+```
 
 # Question 4:
 
