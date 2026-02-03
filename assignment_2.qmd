@@ -50,7 +50,33 @@ Write a version of `pos_na()` that checks whether the two input vectors have the
 
 ```{r}
 
-#test 
+v1 = c(1, NA, 2) 
+v2 = c(NA, NA, 3)
+
+pos_na <- function(vector1, vector2) {
+  if (length(vector1) == length(vector2)) {
+    positon_NA_1 <- which(is.na(vector1))  
+    position_NA_2 <- which(is.na(vector2))
+    return(list(positon_NA_1, position_NA_2))
+  }
+  else {
+    return("The vectors are not the same length.")
+  }
+}
+  
+pos_na(v1, v2)
+
+
+
+```
+
+```{r}
+
+v3 = c(1, NA, 2) 
+v4 = c(NA, NA)
+pos_na(v3, v4)
+
+
 ```
 
 ### (1ii) Without using an `if` statement
@@ -59,7 +85,25 @@ Write a second version of `pos_na()` that performs the same task **without** usi
 
 -   You may use any other valid R mechanism (e.g., `stop()`, `stopifnot()`, or logical short‑circuiting) to handle the case where the vectors differ in length.
 
-\`\`
+```{r}
+
+pos_na_2 <- function(vector1, vector2) {
+  stopifnot(length(vector1) == length(vector2))
+  return(list(which(is.na(vector1)), which(is.na(vector2))))
+  }
+
+pos_na_2(v3, v4)
+
+```
+
+```{r}
+
+v5 = c(NA, NA, NA, 2, NA, 4, NA) 
+v6 = c(NA, NA, 2, 4, 4, NA, NA)
+pos_na_2(v5, v6)
+
+
+```
 
 # Question 2
 
