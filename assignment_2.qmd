@@ -119,11 +119,29 @@ tail(wamata_ridership)
 
 ```{r}
 
-wamata_ridership |>
-      mutate(month_number = month(wamata_ridership$Date)) |>
-      mutate(date_number = day(wamata_ridership$Date))
+wamata_ridership <- wamata_ridership |> 
+      mutate(Date = ymd(Date),
+             Year = year(Date),
+             Month = month(Date),
+             DayOfWeek = wday(Date, label = TRUE, abbr = TRUE),
+             DayofMonth = day(Date)) 
 
 
+wamata <- wamata_ridership |>
+  filter(!(Year %in% c(2004,2005)))
+
+monthly_totals <- wamata |>
+  group_by(Year, Month) |>
+  summarise(monthly_rides = sum(Total), .groups = "drop")
+
+wamata_prob <- wamata |>
+  left_join(monthly_totals, by = c("Year", "Month")) |>
+  mutate(proportions = Total / monthly_rides)
+
+ggplot(wamata_prob, aes(x = DayOfWeek, y = proportions)) + geom_boxplot()  + 
+  labs(title = "Boxplot of Wamata Ridership Proportions",
+       y = "Proportion of Monthly Rides",
+       x = "Day of the Week") 
 ```
 
 ```{r}
@@ -230,13 +248,20 @@ records
     -   `hire_date`\
     -   `dept`
 
-2.  **Convert `hire_date` into a proper `Date` object**, correctly handling all of the different date formats.
+```{r}
 
-3.  **Convert `dept` into an ordered factor** with the levels:\
+split_records <- str_split(records, "\\|")
+
+split_records
+```
+
+1.  **Convert `hire_date` into a proper `Date` object**, correctly handling all of the different date formats.
+
+2.  **Convert `dept` into an ordered factor** with the levels:\
     `HR`, `FIN`, `IT`, `MKT`.
 
-4.  **Construct a clean data frame** containing the parsed and converted variables.
+3.  **Construct a clean data frame** containing the parsed and converted variables.
 
-5.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
+4.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
 
-6.  **Return the final cleaned data frame.**
+5.  **Return the final cleaned data frame.**
