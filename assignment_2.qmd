@@ -107,7 +107,7 @@ pos_na_2(v5, v6)
 
 # Question 2
 
-Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of the proport
+Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of ridership proportions by day of the week. But exclude any days from 2004 and 2005.
 
 ```{r}
 
@@ -252,16 +252,45 @@ records
 
 split_records <- str_split(records, "\\|")
 
-split_records
+name <- c(split_records[[1]][1], split_records[[2]][1], split_records[[3]][1], split_records[[4]][1], split_records[[5]][1])
+
+hire_date <- c(split_records[[1]][2], split_records[[2]][2], split_records[[3]][2], split_records[[4]][2], split_records[[5]][2])
+
+dept <- c(split_records[[1]][3], split_records[[2]][3], split_records[[3]][3], split_records[[4]][3], split_records[[5]][3])
+
+dept
 ```
 
-1.  **Convert `hire_date` into a proper `Date` object**, correctly handling all of the different date formats.
+2.  **Convert `hire_date` into a proper `Date` object**, correctly handling all of the different date formats.
 
-2.  **Convert `dept` into an ordered factor** with the levels:\
+```{r}
+
+hire_date <- c(parse_date(hire_date[1], format = "%Y-%m-%d"), parse_date(hire_date[2], format = "%d/%m/%Y"), mdy(hire_date[3]), parse_date(hire_date[4], format = "%Y/%m/%d"), parse_date(hire_date[5], format = "%m-%d-%Y"))
+
+hire_date
+```
+
+3.  **Convert `dept` into an ordered factor** with the levels:\
     `HR`, `FIN`, `IT`, `MKT`.
 
-3.  **Construct a clean data frame** containing the parsed and converted variables.
+```{r}
 
-4.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
+dept_levels <- c("HR", "FIN", "IT", "MKT")
 
-5.  **Return the final cleaned data frame.**
+dept_ordered <- factor(dept, levels = dept_levels)
+
+dept_ordered
+```
+
+4.  **Construct a clean data frame** containing the parsed and converted variables.
+
+```{r}
+
+hiring <- tibble(name, hire_date, dept)
+
+hiring
+```
+
+1.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
+
+2.  **Return the final cleaned data frame.**
