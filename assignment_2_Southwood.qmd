@@ -278,11 +278,13 @@ hire_date
 
 ```{r}
 
-dept_levels <- c("HR", "FIN", "IT", "MKT")
+dept <- str_trim(dept)
 
-dept_ordered <- factor(dept, levels = dept_levels)
+dept <- factor(dept, levels = c("HR", "FIN", "IT", "MKT"), ordered = TRUE)
 
-dept_ordered
+dept
+
+
 ```
 
 4.  **Construct a clean data frame** containing the parsed and converted variables.
@@ -296,4 +298,4 @@ hiring
 
 1.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
 
-2.  **Return the final cleaned data frame.**
+1.  **Return the final cleaned data frame.**
