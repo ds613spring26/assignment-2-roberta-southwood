@@ -309,3 +309,9 @@ hiring <- hiring |>
 ```
 
 1.  **Return the final cleaned data frame.**
+
+```{r}
+
+hiring 
+
+```
