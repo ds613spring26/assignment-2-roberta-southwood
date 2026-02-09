@@ -1,5 +1,6 @@
 ---
-title: "assignment_2"
+title: "assignment_2_southwood"
+author: "Roberta Southwood"
 format: html
 editor: visual
 ---
@@ -95,8 +96,9 @@ pos_na_2 <- function(vector1, vector2) {
   return(list(which(is.na(vector1)), which(is.na(vector2))))
   }
 
-pos_na_2(v3, v4) 
-
+# pos_na_2(v3, v4) 
+# stops since length(vector1) == length(vector2) is not TRUE
+# cannot render wihout puting as a comment 
 ```
 
 ```{r}
