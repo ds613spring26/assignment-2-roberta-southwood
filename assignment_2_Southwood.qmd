@@ -296,6 +296,16 @@ hiring <- tibble(name, hire_date, dept)
 hiring
 ```
 
-1.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
+5.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
+
+```{r}
+
+today <- as.Date("2026-02-09")
+
+hiring <- hiring |>
+  mutate(years_worked = interval(hire_date, today) %/% years(1))
+
+
+```
 
 1.  **Return the final cleaned data frame.**
