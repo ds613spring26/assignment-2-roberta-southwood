@@ -49,7 +49,6 @@ Write a version of `pos_na()` that checks whether the two input vectors have the
 > `"The vectors are not the same length."`
 
 ```{r}
-
 v1 = c(1, NA, 2) 
 v2 = c(NA, NA, 3)
 
@@ -87,12 +86,16 @@ Write a second version of `pos_na()` that performs the same task **without** usi
 
 ```{r}
 
+```
+
+```{r}
+
 pos_na_2 <- function(vector1, vector2) {
   stopifnot(length(vector1) == length(vector2))
   return(list(which(is.na(vector1)), which(is.na(vector2))))
   }
 
-pos_na_2(v3, v4)
+pos_na_2(v3, v4) 
 
 ```
 
